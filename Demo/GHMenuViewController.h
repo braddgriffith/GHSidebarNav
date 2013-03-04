@@ -12,7 +12,7 @@
 @interface GHMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
 @private
 	GHRevealViewController *_sidebarVC;
-	UISearchBar *_searchBar;
+	//UISearchBar *_searchBar;
 	UITableView *_menuTableView;
 	NSArray *_headers;
 	NSArray *_controllers;
@@ -20,7 +20,7 @@
 }
 
 - (id)initWithSidebarViewController:(GHRevealViewController *)sidebarVC 
-					  withSearchBar:(UISearchBar *)searchBar 
+					  withSearchBar:(UISearchBar *)searchBar
 						withHeaders:(NSArray *)headers 
 					withControllers:(NSArray *)controllers 
 					  withCellInfos:(NSArray *)cellInfos;

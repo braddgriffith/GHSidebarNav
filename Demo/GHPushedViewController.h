@@ -1,4 +1,4 @@
-//
+//  RIGHT SCREEN
 //  GHPushedViewController.h
 //  GHSidebarNav
 //

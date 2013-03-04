@@ -1,4 +1,4 @@
-//
+//  MIDDLE SCREEN
 //  GHRootViewController.m
 //  GHSidebarNav
 //
@@ -6,16 +6,13 @@
 //
 
 #import "GHRootViewController.h"
-#import "GHPushedViewController.h"
 
 
 #pragma mark -
 #pragma mark Private Interface
 @interface GHRootViewController ()
-- (void)pushViewController;
 - (void)revealSidebar;
 @end
-
 
 #pragma mark -
 #pragma mark Implementation
@@ -27,10 +24,12 @@
 		self.title = title;
 		_revealBlock = [revealBlock copy];
 		self.navigationItem.leftBarButtonItem = 
-			[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
-														  target:self
-														  action:@selector(revealSidebar)];
+        [[UIBarButtonItem alloc] initWithImage:([UIImage imageNamed:@"ButtonMenu.png"])
+                                         style:normal
+                                        target:self
+                                        action:@selector(revealSidebar)];
 	}
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	return self;
 }
 
@@ -38,21 +37,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-	self.view.backgroundColor = [UIColor lightGrayColor];
-	UIButton *pushButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[pushButton setTitle:@"Push" forState:UIControlStateNormal];
-	[pushButton addTarget:self action:@selector(pushViewController) forControlEvents:UIControlEventTouchUpInside];
-	[pushButton sizeToFit];
-	[self.view addSubview:pushButton];
+    self.view.backgroundColor = [UIColor blackColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 }
 
 #pragma mark Private Methods
-- (void)pushViewController {
-	NSString *vcTitle = [self.title stringByAppendingString:@" - Pushed"];
-	UIViewController *vc = [[GHPushedViewController alloc] initWithTitle:vcTitle];
-	[self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void)revealSidebar {
 	_revealBlock();
 }

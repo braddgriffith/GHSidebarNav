@@ -1,3 +1,4 @@
+//  LEFT SCREEN
 //
 //  GHMenuViewController.m
 //  GHSidebarNav
@@ -18,13 +19,13 @@
 
 #pragma mark Memory Management
 - (id)initWithSidebarViewController:(GHRevealViewController *)sidebarVC 
-					  withSearchBar:(UISearchBar *)searchBar 
+					  withSearchBar:(UISearchBar *)searchBar
 						withHeaders:(NSArray *)headers 
 					withControllers:(NSArray *)controllers 
 					  withCellInfos:(NSArray *)cellInfos {
 	if (self = [super initWithNibName:nil bundle:nil]) {
 		_sidebarVC = sidebarVC;
-		_searchBar = searchBar;
+		//_searchBar = searchBar;
 		_headers = headers;
 		_controllers = controllers;
 		_cellInfos = cellInfos;
@@ -41,21 +42,25 @@
 	self.view.frame = CGRectMake(0.0f, 0.0f, kGHRevealSidebarWidth, CGRectGetHeight(self.view.bounds));
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 	
-	[self.view addSubview:_searchBar];
+	//[self.view addSubview:_searchBar];
+    
+    UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 43.0f, [UIScreen mainScreen].bounds.size.height, 1.0f)];
+    topLine.backgroundColor = [UIColor whiteColor];//[UIColor colorWithRed:(54.0f/255.0f) green:(61.0f/255.0f) blue:(76.0f/255.0f) alpha:1.0f];
+    [self.view addSubview:topLine];
 	
 	_menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 44.0f, kGHRevealSidebarWidth, CGRectGetHeight(self.view.bounds) - 44.0f) 
 												  style:UITableViewStylePlain];
 	_menuTableView.delegate = self;
 	_menuTableView.dataSource = self;
 	_menuTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-	_menuTableView.backgroundColor = [UIColor clearColor];
-	_menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	_menuTableView.backgroundColor = [UIColor blackColor];//[UIColor clearColor];
+	_menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone; //UITableViewCellSeparatorStyleSingleLine puts lines all the way down the tableview
 	[self.view addSubview:_menuTableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	self.view.frame = CGRectMake(0.0f, 0.0f,kGHRevealSidebarWidth, CGRectGetHeight(self.view.bounds));
-	[_searchBar sizeToFit];
+	//[_searchBar sizeToFit];
 	[self selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
 }
 
@@ -83,6 +88,11 @@
 	NSDictionary *info = _cellInfos[indexPath.section][indexPath.row];
 	cell.textLabel.text = info[kSidebarCellTextKey];
 	cell.imageView.image = info[kSidebarCellImageKey];
+    
+    UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0.0f, cell.frame.size.height-1.0, [UIScreen mainScreen].bounds.size.height, 1.0f)];
+    bottomLine.backgroundColor = [UIColor whiteColor];
+    [cell addSubview:bottomLine];
+    
     return cell;
 }
 
@@ -99,8 +109,8 @@
 		CAGradientLayer *gradient = [CAGradientLayer layer];
 		gradient.frame = headerView.bounds;
 		gradient.colors = @[
-			(id)[UIColor colorWithRed:(67.0f/255.0f) green:(74.0f/255.0f) blue:(94.0f/255.0f) alpha:1.0f].CGColor,
-			(id)[UIColor colorWithRed:(57.0f/255.0f) green:(64.0f/255.0f) blue:(82.0f/255.0f) alpha:1.0f].CGColor,
+        (id)[UIColor blackColor],//[UIColor colorWithRed:(67.0f/255.0f) green:(74.0f/255.0f) blue:(94.0f/255.0f) alpha:1.0f].CGColor,
+			(id)[UIColor blackColor],//[UIColor colorWithRed:(57.0f/255.0f) green:(64.0f/255.0f) blue:(82.0f/255.0f) alpha:1.0f].CGColor,
 		];
 		[headerView.layer insertSublayer:gradient atIndex:0];
 		
@@ -114,11 +124,11 @@
 		[headerView addSubview:textLabel];
 		
 		UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.height, 1.0f)];
-		topLine.backgroundColor = [UIColor colorWithRed:(78.0f/255.0f) green:(86.0f/255.0f) blue:(103.0f/255.0f) alpha:1.0f];
+		topLine.backgroundColor = [UIColor whiteColor];//[UIColor colorWithRed:(78.0f/255.0f) green:(86.0f/255.0f) blue:(103.0f/255.0f) alpha:1.0f];
 		[headerView addSubview:topLine];
 		
 		UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 21.0f, [UIScreen mainScreen].bounds.size.height, 1.0f)];
-		bottomLine.backgroundColor = [UIColor colorWithRed:(36.0f/255.0f) green:(42.0f/255.0f) blue:(5.0f/255.0f) alpha:1.0f];
+		bottomLine.backgroundColor = [UIColor whiteColor];//[UIColor colorWithRed:(36.0f/255.0f) green:(42.0f/255.0f) blue:(5.0f/255.0f) alpha:1.0f];
 		[headerView addSubview:bottomLine];
 	}
 	return headerView;
@@ -127,6 +137,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	_sidebarVC.contentViewController = _controllers[indexPath.section][indexPath.row];
 	[_sidebarVC toggleSidebar:NO duration:kGHRevealSidebarDefaultAnimationDuration];
+    
+//    if (indexPath.row == 0) {
+//        statements
+//    }
+    
 }
 
 #pragma mark Public Methods

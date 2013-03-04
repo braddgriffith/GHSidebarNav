@@ -103,12 +103,12 @@ const CGFloat kGHRevealSidebarFlickVelocity = 1000.0f;
 		
 		_sidebarView = [[UIView alloc] initWithFrame:self.view.bounds];
 		_sidebarView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-		_sidebarView.backgroundColor = [UIColor clearColor];
+		_sidebarView.backgroundColor = [UIColor blackColor];//[UIColor clearColor];
 		[self.view addSubview:_sidebarView];
 		
 		_contentView = [[UIView alloc] initWithFrame:self.view.bounds];
 		_contentView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-		_contentView.backgroundColor = [UIColor clearColor];
+		_contentView.backgroundColor = [UIColor blackColor];//[UIColor clearColor];
 		_contentView.layer.masksToBounds = NO;
 		_contentView.layer.shadowColor = [UIColor blackColor].CGColor;
 		_contentView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);

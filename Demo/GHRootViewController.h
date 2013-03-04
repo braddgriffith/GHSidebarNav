@@ -9,11 +9,10 @@
 
 typedef void (^RevealBlock)();
 
-@interface GHRootViewController : UIViewController {
-@private
-	RevealBlock _revealBlock;
-}
+@interface GHRootViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {}
 
 - (id)initWithTitle:(NSString *)title withRevealBlock:(RevealBlock)revealBlock;
+
+@property (copy,nonatomic)RevealBlock revealBlock;
 
 @end
