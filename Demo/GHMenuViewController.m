@@ -48,13 +48,18 @@
     topLine.backgroundColor = [UIColor whiteColor];//[UIColor colorWithRed:(54.0f/255.0f) green:(61.0f/255.0f) blue:(76.0f/255.0f) alpha:1.0f];
     [self.view addSubview:topLine];
 	
-	_menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 44.0f, kGHRevealSidebarWidth, CGRectGetHeight(self.view.bounds) - 44.0f) 
-												  style:UITableViewStylePlain];
+//	_menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 44.0f, kGHRevealSidebarWidth, CGRectGetHeight(self.view.bounds) - 44.0f) 
+//												  style:UITableViewStylePlain];
+    
+    _menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 44.0f, kGHRevealSidebarWidth, 42.0f * ((NSArray *)_cellInfos[0]).count + 2.0f * (((NSArray *)_cellInfos[0]).count + 1))
+                                                  style:UITableViewStylePlain];
+    
+    _menuTableView.scrollEnabled = NO;
 	_menuTableView.delegate = self;
 	_menuTableView.dataSource = self;
 	_menuTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 	_menuTableView.backgroundColor = [UIColor blackColor];//[UIColor clearColor];
-	_menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone; //UITableViewCellSeparatorStyleSingleLine puts lines all the way down the tableview
+	_menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 	[self.view addSubview:_menuTableView];
 }
 
@@ -137,11 +142,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	_sidebarVC.contentViewController = _controllers[indexPath.section][indexPath.row];
 	[_sidebarVC toggleSidebar:NO duration:kGHRevealSidebarDefaultAnimationDuration];
-    
-//    if (indexPath.row == 0) {
-//        statements
-//    }
-    
 }
 
 #pragma mark Public Methods

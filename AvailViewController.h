@@ -11,4 +11,6 @@
 
 @interface AvailViewController : GHRootViewController
 
+@property (nonatomic, strong) UITableView *seatsView;
+
 @end

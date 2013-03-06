@@ -36,7 +36,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
 
-    
 	self.revealController = [[GHRevealViewController alloc] initWithNibName:nil bundle:nil];
 	self.revealController.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:1.0];
 	
