@@ -131,11 +131,9 @@ int priceBuffer = 3;
     
     UILabel *worsePriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(bannerXStart+bannerWidth-locationLabelIndent-2*priceLabelSize.width-priceBuffer, locationYStart, priceLabelSize.width, locationLabelHeight)];
     [worsePriceLabel setBackgroundColor:[UIColor clearColor]];
-    //[worsePriceLabel setFont:
     [worsePriceLabel setTextColor:[UIColor darkTextColor]];
     [worsePriceLabel setText:@"$75"];
     worsePriceLabel.textAlignment = NSTextAlignmentRight;
-    //[worsePriceLabel sizeToFit];
     [cell.contentView addSubview:worsePriceLabel];
 
     //Need to connect all this stuff and animate this down
